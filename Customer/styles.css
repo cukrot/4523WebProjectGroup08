@@ -1,0 +1,505 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    scroll-behavior: smooth; /* Enable smooth scrolling for anchor links */
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Top Banner */
+.top-banner {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+}
+
+.top-banner p {
+    font-size: 14px;
+}
+
+.top-banner a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.top-banner a:hover {
+    color: #f5c518; /* Hover effect for "Sign Up Now" link */
+}
+
+.close-banner {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.close-banner:hover {
+    color: #f5c518; /* Hover effect for close button */
+}
+
+/* Header */
+header {
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+nav ul li a:hover {
+    color: #f5c518; /* Hover effect for nav links */
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.header-icons span, .header-icons a {
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.header-icons span:hover, .header-icons a:hover {
+    color: #f5c518; /* Hover effect for cart and user icons */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Shadow effect on hover */
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input {
+    width: 300px;
+    padding: 10px 10px 10px 40px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 14px;
+    background: url('https://cdn-icons-png.flaticon.com/512/54/54481.png') no-repeat 10px center;
+    background-size: 20px;
+}
+
+.search-bar input::placeholder {
+    color: #999;
+}
+
+/* Hero Section */
+.hero {
+    padding: 50px 0;
+}
+
+.hero .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hero-content {
+    width: 50%;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.shop-now {
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.shop-now:hover {
+    background-color: #f5c518; /* Hover effect for Shop Now button */
+    transform: scale(1.05); /* Slight scale on hover */
+}
+
+.hero-image {
+    width: 45%;
+    height: 300px;
+    background-color: #333;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.stat h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.stat p {
+    color: #666;
+}
+
+/* Product Sections (On Sale, New Arrivals, Top Selling) */
+.on-sale, .new-arrivals, .top-selling {
+    padding: 50px 0;
+}
+
+.on-sale h2, .new-arrivals h2, .top-selling h2 {
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.product {
+    text-align: center;
+    transition: transform 0.3s ease; /* Smooth transition for hover effect (already present) */
+}
+
+.product:hover {
+    transform: scale(1.05); /* Hover effect for products (already present) */
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    background-color: #333;
+    margin-bottom: 10px;
+}
+
+.product h4 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.product p {
+    font-size: 14px;
+    color: #000;
+}
+
+/* Customer Reviews */
+.customer-reviews {
+    padding: 50px 0;
+}
+
+.customer-reviews h2 {
+    font-size: 32px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.reviews-carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reviews {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.review {
+    flex: 0 0 100%;
+    text-align: center;
+    padding: 20px;
+    display: none;
+}
+
+.review.active {
+    display: block;
+}
+
+.stars {
+    color: #f5c518;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.review h5 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.review p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.prev-btn, .next-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #f5c518;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: color 0.2s ease; /* Smooth transition for hover effect (already present) */
+}
+
+.prev-btn:hover, .next-btn:hover {
+    color: #000; /* Hover effect for carousel arrows (already present) */
+}
+
+.prev-btn {
+    left: 0;
+}
+
+.next-btn {
+    right: 0;
+}
+
+.pagination-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.dot:hover {
+    background-color: #f5c518; /* Hover effect for pagination dots */
+    transform: scale(1.2); /* Slight scale on hover */
+}
+
+.dot.active {
+    background-color: #f5c518;
+}
+
+/* Newsletter */
+.newsletter {
+    padding: 50px 0;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+}
+
+.newsletter h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.newsletter-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.newsletter-form input {
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    width: 300px;
+}
+
+.newsletter-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.newsletter-form button:hover {
+    background-color: #f5c518; /* Hover effect for Subscribe button */
+    transform: scale(1.05); /* Slight scale on hover */
+}
+
+/* Footer */
+footer {
+    padding: 50px 0;
+    border-top: 1px solid #ddd;
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.footer-section h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.footer-section p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.footer-section ul li a:hover {
+    color: #f5c518; /* Hover effect for footer links */
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.footer-bottom p {
+    color: #666;
+}
+
+.add-to-cart {
+    padding: 8px 16px;
+    background-color: #f5c518;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background-color: #e0b015;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .top-banner p {
+        font-size: 12px;
+    }
+
+    .hero .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-content, .hero-image {
+        width: 100%;
+    }
+
+    .stats {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    footer .container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    nav ul {
+        gap: 20px;
+    }
+
+    .header-right {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header-icons {
+        gap: 15px;
+    }
+
+    .search-bar input {
+        width: 100%;
+    }
+
+    .reviews {
+        max-width: 100%;
+    }
+
+    .prev-btn, .next-btn {
+        font-size: 20px;
+    }
+}

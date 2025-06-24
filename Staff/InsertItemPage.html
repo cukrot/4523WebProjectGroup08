@@ -1,0 +1,110 @@
+<header class="page-header">
+    <link rel="stylesheet" href="InsertItem.css">
+    <div class="header-block">
+      <div class="logo-container">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/dc42287d2c23d4b3123ff5b6ea3b219df341af84?placeholderIfAbsent=true&apiKey=55563a4da5114499be8c7b1e73961a2a" alt="Logo" class="logo-image" />
+      </div>
+    </div>
+    <nav class="navigation-menu">
+      <a href="#" class="nav-link active">Products Insert</a>
+      <a href="#" class="nav-link">Products Delete</a>
+      <a href="#" class="nav-link">Materials Insert</a>
+      <a href="#" class="nav-link">Orders</a>
+    </nav>
+  </header>
+  
+  <main class="main-content">
+    <div class="content-container">
+      <aside class="sidebar">
+        <h1 class="page-title">Insert items' information</h1>
+      </aside>
+  
+      <section class="forms-section">
+        <div class="forms-container">
+          <form class="product-form">
+            <div class="form-group">
+              <label class="form-label">Product ID</label>
+              <input
+                type="text"
+                class="form-input"
+                placeholder="(Auto Fill)"
+                readonly
+              />
+            </div>
+  
+            <div class="form-group">
+              <label class="form-label">Product Name</label>
+              <input type="text" class="form-input" placeholder="Value" />
+            </div>
+  
+            <div class="form-group">
+              <label class="form-label">Description</label>
+              <textarea class="form-textarea" placeholder="Value"></textarea>
+            </div>
+  
+            <div class="form-group">
+              <label class="form-label">Single Cost</label>
+              <input type="text" class="form-input" placeholder="Value" />
+            </div>
+  
+            <div class="upload-section">
+              <label class="form-label">Upload Image</label>
+              <button type="button" class="upload-button">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d0ec83faeed062b232329ff740346d294ac4a33e?placeholderIfAbsent=true&apiKey=55563a4da5114499be8c7b1e73961a2a" alt="Upload" class="upload-icon" />
+              </button>
+            </div>
+  
+            <div class="form-actions">
+              <button type="submit" class="submit-button">Submit Button</button>
+            </div>
+          </form>
+  
+          <div class="materials-section">
+            <form class="materials-form">
+              <div class="form-group">
+                <label class="form-label">Material ID</label>
+                <input type="text" class="form-input" placeholder="Value" />
+              </div>
+  
+              <div class="form-group">
+                <label class="form-label">Material Quantity</label>
+                <input type="text" class="form-input" placeholder="Value" />
+              </div>
+  
+              <div class="form-actions">
+                <button type="submit" class="add-button">ADD Button</button>
+              </div>
+            </form>
+  
+            <div class="materials-list">
+              <div class="list-header">
+                <span class="list-column">Material ID</span>
+                <span class="list-column">Product Quantity</span>
+                <span class="list-column"></span>
+              </div>
+  
+              <div class="list-items">
+                <div class="list-item">
+                  <span class="item-column">MAT003</span>
+                  <span class="item-column">4</span>
+                  <button class="remove-button">Remove</button>
+                </div>
+  
+                <div class="list-item">
+                  <span class="item-column">MAT006</span>
+                  <span class="item-column">1</span>
+                  <button class="remove-button">Remove</button>
+                </div>
+  
+                <div class="list-item">
+                  <span class="item-column">MAT012</span>
+                  <span class="item-column">2</span>
+                  <button class="remove-button">Remove</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
