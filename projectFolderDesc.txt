@@ -1,0 +1,27 @@
+project/
+├── assets/                     # 靜態資源
+│   ├── css/
+│   │   ├── insert_item.css     # 產品插入頁面專用CSS
+│   │   └── global.css          # 全局CSS（共享樣式）
+│   ├── js/
+│   │   ├── insert_item.js      # 產品插入頁面專用JS
+│   │   └── language.js         # 語言切換邏輯
+│   └── images/
+│   │   └── logo.png            # 網站Logo
+├── includes/                   # 共享PHP文件
+│   ├── db_connect.php          # 數據庫連接邏輯
+│   ├── header.php              # 頁面頭部（導航菜單）
+│   ├── footer.php              # 頁面底部
+│   └── language.php            # 語言配置文件（中英文）
+├── uploads/                    # 上傳的圖片文件
+├── pages/                      # 頁面文件
+│   ├── insert_product.php      # 產品插入頁面（原InsertItemPage.html）
+│   ├── delete_product.php      # 產品刪除頁面
+│   ├── insert_material.php     # 材料插入頁面
+│   └── orders.php              # 訂單管理頁面
+├── api/                        # 後端API
+│   ├── insert_product.php      # 處理產品插入請求
+│   └── other_apis.php          # 其他功能API
+├── sql/
+│   └── createProjectDB.sql     # 數據庫結構和測試數據
+└── index.php                   # 網站入口（可重定向到Staff登錄）
