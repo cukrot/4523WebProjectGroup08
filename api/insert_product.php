@@ -15,6 +15,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!isset($material['mid']) || !isset($material['pmqty']) || $material['pmqty'] <= 0) {
             $errors[] = "Invalid material data.";
         }
+        // 檢查mid是否存在
+        $mid = intval($material['mid']);
+        $sql = "SELECT COUNT(*) FROM material WHERE mid = $mid";
+        $result = mysqli_query($conn, $sql);
+        $count = mysqli_fetch_row($result)[0];
+        if ($count == 0) {
+            $errors[] = "Material ID $mid does not exist.";
+        }
     }
 
     $pimage = null;

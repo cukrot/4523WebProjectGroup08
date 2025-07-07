@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>View Orders</title>
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/view_orders.css">
+    <script src="../../assets/js/language.js"></script>
+    <script src="../../assets/js/common.js"></script>
+    <script src="../../assets/js/view_orders.js" defer></script>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <h1 class="page-title" data-i18n="view_orders_title">View order records</h1>
+        <div class="search-container">
+            <input type="text" class="search-input" id="search-input" data-i18n-placeholder="search_placeholder" placeholder="Search by Order ID or Status">
+            <button class="search-button" id="search-button" data-i18n="search">Search</button>
+        </div>
+        <div class="table-container">
+            <table class="orders-table">
+                <thead>
+                    <tr class="table-header">
+                        <th data-i18n="order_id">Order ID</th>
+                        <th data-i18n="order_date">Order Date</th>
+                        <th data-i18n="delivery_date">Order Delivery Date</th>
+                        <th data-i18n="order_status">Order Status</th>
+                        <th data-i18n="details">Details</th>
+                    </tr>
+                </thead>
+                <tbody id="orders-body"></tbody>
+            </table>
+        </div>
+        <div class="pagination-container">
+            <a href="#" class="pagination-link" id="first-page" data-i18n="first_page">First</a>
+            <a href="#" class="pagination-link" id="prev-page" data-i18n="previous_page">Previous</a>
+            <span id="page-info"></span>
+            <a href="#" class="pagination-link" id="next-page" data-i18n="next_page">Next</a>
+            <a href="#" class="pagination-link" id="last-page" data-i18n="last_page">Last</a>
+        </div>
+    </main>
+</body>
+</html>

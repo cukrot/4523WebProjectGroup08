@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Insert Material</title>
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/insert_item.css">
+    <script src="../../assets/js/language.js"></script>
+    <script src="../../assets/js/common.js"></script>
+    <script src="../../assets/js/insert_material.js" defer></script>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <div class="content-container">
+            <aside class="sidebar">
+                <h1 class="page-title" data-i18n="page_title">Insert items' information</h1>
+            </aside>
+            <section class="forms-section">
+                <div class="forms-container">
+                    <form id="material-form" class="product-form" autocomplete="off">
+                        <div class="form-group">
+                            <label class="form-label" for="mname" data-i18n="material_name_input">Material Name</label>
+                            <input type="text" id="mname" name="mname" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="munit" data-i18n="unit">Unit</label>
+                            <select id="munit" name="munit" class="form-input" required>
+                                <option value="" data-i18n="select_unit">Select Unit</option>
+                                <option value="KG">KG</option>
+                                <option value="PC">PC</option>
+                                <option value="METER">METER</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="mreorderqty" data-i18n="reorder_level">Re-order Level</label>
+                            <input type="number" id="mreorderqty" name="mreorderqty" class="form-input" min="1" required>
+                        </div>
+                        <button type="submit" class="submit-button" data-i18n="submit">Submit</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

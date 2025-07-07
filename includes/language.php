@@ -1,14 +1,12 @@
 <?php
 session_start();
 
-// 默認語言
 $default_lang = 'en';
 if (isset($_GET['lang'])) {
     $_SESSION['lang'] = $_GET['lang'] === 'zh' ? 'zh' : 'en';
 }
 $lang = $_SESSION['lang'] ?? $default_lang;
 
-// 語言詞彙
 $translations = [
     'en' => [
         'page_title' => 'Insert items\' information',
@@ -27,7 +25,59 @@ $translations = [
         'select_material' => 'Select Material',
         'error_no_material' => 'Please add at least one material.',
         'error_invalid_input' => 'Please select a material and enter a valid quantity.',
-        'success_message' => 'Product inserted successfully.'
+        'success_message' => 'Product inserted successfully.',
+        'nav_products_insert' => 'Products Insert',
+        'nav_products_delete' => 'Products Delete',
+        'nav_materials_insert' => 'Materials Insert',
+        'nav_orders' => 'Orders',
+        'material_name_input' => 'Material Name',
+        'physical_quantity' => 'Physical Quantity',
+        'unit' => 'Unit',
+        'select_unit' => 'Select Unit',
+        'reorder_level' => 'Re-order Level',
+        'error_invalid_material' => 'Please enter valid material information.',
+        'material_success_message' => 'Material inserted successfully.',
+        'view_orders_title' => 'View order records',
+        'order_id' => 'Order ID',
+        'order_date' => 'Order Date',
+        'delivery_date' => 'Order Delivery Date',
+        'order_status' => 'Order Status',
+        'details' => 'Details',
+        'search_placeholder' => 'Search by Order ID or Status',
+        'previous_page' => 'Previous',
+        'next_page' => 'Next',
+        'first_page' => 'First',
+        'last_page' => 'Last',
+        'order_detail_title' => 'View order details',
+        'order_info' => 'Order Information',
+        'customer_info' => 'Customer Information',
+        'delivery_info' => 'Delivery Detail',
+        'ordered_items' => 'Ordered Item',
+        'use_of_material' => 'Use of Material',
+        'contact_name' => 'Contact Name',
+        'contact_number' => 'Contact Number',
+        'delivery_address' => 'Delivery Address',
+        'total_amount' => 'Total Amount',
+        'product_id' => 'Product ID',
+        'order_quantity' => 'Order Quantity',
+        'amount' => 'Amount',
+        'required_quantity' => 'Required Quantity',
+        'update_status' => 'Update Order Status',
+        'modify_quantity' => 'Modify Order Quantity',
+        'update_material_quantity' => 'Update Quantity of Used Material',
+        'accepted' => 'Accepted',
+        'rejected' => 'Rejected',
+        'error_invalid_order' => 'Please enter valid order information.',
+        'order_update_success' => 'Order updated successfully.',
+        'pending' => 'Pending',
+        'in_progress' => 'In Progress',
+        'completed' => 'Completed',
+        'cancelled' => 'Cancelled',
+        'modify_delivery_date' => 'Modify Delivery Date',
+        'select_status' => 'Select Status',
+        // 新增詞彙
+        'material_details' => 'Material Details',
+        'total_material' => 'Total Material'
     ],
     'zh' => [
         'page_title' => '插入產品信息',
@@ -46,10 +96,61 @@ $translations = [
         'select_material' => '選擇材料',
         'error_no_material' => '請至少添加一種材料。',
         'error_invalid_input' => '請選擇材料並輸入有效的數量。',
-        'success_message' => '產品插入成功。'
+        'success_message' => '產品插入成功。',
+        'nav_products_insert' => '產品插入',
+        'nav_products_delete' => '產品刪除',
+        'nav_materials_insert' => '材料插入',
+        'nav_orders' => '訂單管理',
+        'material_name_input' => '材料名稱',
+        'physical_quantity' => '實際數量',
+        'unit' => '單位',
+        'select_unit' => '選擇單位',
+        'reorder_level' => '重新訂購水平',
+        'error_invalid_material' => '請輸入有效的材料信息。',
+        'material_success_message' => '材料插入成功。',
+        'view_orders_title' => '查看訂單記錄',
+        'order_id' => '訂單編號',
+        'order_date' => '訂單日期',
+        'delivery_date' => '送貨日期',
+        'order_status' => '訂單狀態',
+        'details' => '詳情',
+        'search_placeholder' => '按訂單編號或狀態搜尋',
+        'previous_page' => '上一頁',
+        'next_page' => '下一頁',
+        'first_page' => '首頁',
+        'last_page' => '末頁',
+        'order_detail_title' => '查看訂單詳情',
+        'order_info' => '訂單信息',
+        'customer_info' => '客戶信息',
+        'delivery_info' => '送貨詳情',
+        'ordered_items' => '訂購項目',
+        'use_of_material' => '使用材料',
+        'contact_name' => '聯繫人姓名',
+        'contact_number' => '聯繫電話',
+        'delivery_address' => '送貨地址',
+        'total_amount' => '總金額',
+        'product_id' => '產品編號',
+        'order_quantity' => '訂單數量',
+        'amount' => '金額',
+        'required_quantity' => '所需數量',
+        'update_status' => '更新訂單狀態',
+        'modify_quantity' => '修改訂單數量',
+        'update_material_quantity' => '更新使用材料數量',
+        'accepted' => '已接受',
+        'rejected' => '已拒絕',
+        'error_invalid_order' => '請輸入有效的訂單信息。',
+        'order_update_success' => '訂單更新成功。',
+        'pending' => '待處理',
+        'in_progress' => '處理中',
+        'completed' => '已完成',
+        'cancelled' => '已取消',
+        'modify_delivery_date' => '修改送貨日期',
+        'select_status' => '選擇狀態',
+        // 新增詞彙
+        'material_details' => '使用材料詳情',
+        'total_material' => '總使用材料'
     ]
 ];
 
-// 獲取當前語言的詞彙
 $t = $translations[$lang];
 ?>

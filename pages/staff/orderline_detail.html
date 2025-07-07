@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Orderline Detail</title>
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/order_detail.css">
+    <script src="../../assets/js/language.js"></script>
+    <script src="../../assets/js/common.js"></script>
+    <script src="../../assets/js/orderline_detail.js" defer></script>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <h1 class="page-title" data-i18n="order_detail_title">View order details</h1>
+        <div class="info-cards-container">
+            <div class="info-card">
+                <h2 class="card-title" data-i18n="order_info">Order Information</h2>
+                <div class="info-list" id="order-info"></div>
+            </div>
+            <div class="info-card">
+                <h2 class="card-title" data-i18n="customer_info">Customer Information</h2>
+                <div class="info-list" id="customer-info"></div>
+            </div>
+            <div class="info-card">
+                <h2 class="card-title" data-i18n="delivery_info">Delivery Detail</h2>
+                <div class="info-list" id="delivery-info"></div>
+            </div>
+        </div>
+        <div class="ordered-items">
+            <h2 class="section-title" data-i18n="ordered_items">Ordered Item</h2>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="product_image">Product Image</th>
+                            <th data-i18n="product_id">Product ID</th>
+                            <th data-i18n="product_name">Product Name</th>
+                            <th data-i18n="order_quantity">Order Quantity</th>
+                            <th data-i18n="amount">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordered-items-body"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="action-row">
+            <form id="modify-quantity-form" class="action-form">
+                <div class="form-group">
+                    <label class="form-label" for="oqty" data-i18n="modify_quantity">Modify Order Quantity</label>
+                    <input type="number" id="oqty" name="oqty" class="form-input" min="1" required>
+                </div>
+                <button type="submit" class="submit-button" data-i18n="submit">Submit</button>
+            </form>
+        </div>
+        <div class="materials-section">
+            <h2 class="section-title" data-i18n="use_of_material">Use of Material</h2>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="material_id">Material ID</th>
+                            <th data-i18n="material_name">Material Name</th>
+                            <th data-i18n="unit">Unit</th>
+                            <th data-i18n="required_quantity">Required Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody id="materials-body"></tbody>
+                </table>
+            </div>
+            <form id="update-material-form" class="material-inputs">
+                <div class="form-group">
+                    <label class="form-label" data-i18n="update_material_quantity">Update Quantity of Used Material</label>
+                    <div id="material-inputs" class="material-inputs"></div>
+                </div>
+                <button type="submit" class="submit-button" data-i18n="submit">Submit</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
