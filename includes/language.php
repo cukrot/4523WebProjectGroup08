@@ -105,7 +105,9 @@ $translations = [
         'material_id' => 'Material ID',
         'search_placeholder_report' => 'Search by Order ID or Product Name',
         'search_placeholder_materials' => 'Search by Material ID or Name',
-        'nav_report' => 'Report'
+        'nav_report' => 'Report',
+        'total_cost' => 'Total Cost', // 原 total_sales_amount
+        'export_csv' => 'Export to CSV'
     ],
     'zh' => [
         'page_title' => '插入產品信息',
@@ -204,7 +206,9 @@ $translations = [
         'material_id' => '材料編號',
         'search_placeholder_report' => '按訂單編號或產品名稱搜尋',
         'search_placeholder_materials' => '按材料編號或名稱搜尋',
-        'nav_report' => '報表'
+        'nav_report' => '報表',
+        'total_cost' => '總成本',
+        'export_csv' => '導出為CSV'
     ]
 ];
 

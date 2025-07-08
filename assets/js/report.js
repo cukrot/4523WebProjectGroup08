@@ -83,6 +83,56 @@ async function loadReport(startDate, endDate, productsSearch = '', materialsSear
     }
 }
 
+async function exportToCsv(startDate, endDate, productsSearch, materialsSearch) {
+    try {
+        const apiUrl = `/4523WebProjectGroup08/api/get_report.php?start_date=${startDate}&end_date=${endDate}&products_search=${encodeURIComponent(productsSearch)}&materials_search=${encodeURIComponent(materialsSearch)}&export=csv`;
+        console.log('Fetching CSV data:', apiUrl); // 調試：確認請求 URL
+        const response = await fetch(apiUrl, {
+            method: 'GET',
+            cache: 'no-store',
+            headers: { 'Accept': 'application/json' }
+        });
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`HTTP error! Status: ${response.status}, Response: ${errorText}`);
+        }
+        const data = await response.json();
+        console.log('CSV API response:', data); // 調試：檢查響應數據
+
+        if (data.result !== 'success') {
+            throw new Error(data.errors.join(', ') || 'Failed to export report');
+        }
+
+        // 生成 CSV 內容
+        let csvContent = 'data:text/csv;charset=utf-8,';
+        csvContent += 'Summary\n';
+        csvContent += `"Total Orders","${data.total_orders || 0}"\n`;
+        csvContent += `"Total Sales Amount","$${Number(data.total_sales_amount || 0).toFixed(2)}"\n`;
+        csvContent += '\nProducts Summary\n';
+        csvContent += '"Product ID","Product Name","Total Quantity","Total Sales Amount"\n';
+        data.products.forEach(product => {
+            csvContent += `"${product.pid}","${product.pname.replace(/"/g, '""')}","${product.total_qty}","$${Number(product.total_amount).toFixed(2)}"\n`;
+        });
+        csvContent += '\nMaterials Summary\n';
+        csvContent += '"Material ID","Material Name","Unit","Total Material Used"\n';
+        data.materials.forEach(material => {
+            csvContent += `"${material.mid}","${material.mname.replace(/"/g, '""')}","${material.munit}","${material.total_material}"\n`;
+        });
+
+        // 創建下載連結
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement('a');
+        link.setAttribute('href', encodedUri);
+        link.setAttribute('download', `report_${startDate}_${endDate}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } catch (error) {
+        console.error('Failed to export CSV:', error);
+        alert('Failed to export CSV: ' + error.message);
+    }
+}
+
 function updatePagination(type, productsSearch, materialsSearch) {
     const prefix = type === 'products' ? 'products' : 'materials';
     const currentPage = type === 'products' ? productsCurrentPage : materialsCurrentPage;
@@ -153,6 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const materialsSearchButton = document.getElementById('materials-search-button');
     const materialsSearchInput = document.getElementById('materials-search-input');
     const filterButton = document.getElementById('filter-button');
+    const exportCsvButton = document.getElementById('export-csv-button');
 
     if (startDateInput && endDateInput) {
         startDateInput.value = startDate.toISOString().split('T')[0];
@@ -243,6 +294,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     } else {
         console.error('Filter button not found');
+    }
+
+    if (exportCsvButton) {
+        exportCsvButton.addEventListener('click', () => {
+            const startDate = startDateInput.value;
+            const endDate = endDateInput.value;
+            const productsSearch = productsSearchInput.value;
+            const materialsSearch = materialsSearchInput.value;
+            if (startDate && endDate) {
+                exportToCsv(startDate, endDate, productsSearch, materialsSearch);
+            } else {
+                alert(window.translations[getLanguage()].error_invalid_date || 'Please select a valid date range.');
+            }
+        });
+    } else {
+        console.error('Export CSV button not found');
     }
 
     loadReport(startDate.toISOString().split('T')[0], endDate.toISOString().split('T')[0]);

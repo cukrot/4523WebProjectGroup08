@@ -9,6 +9,7 @@ $products_search = isset($_GET['products_search']) ? trim($_GET['products_search
 $materials_search = isset($_GET['materials_search']) ? trim($_GET['materials_search']) : '';
 $products_page = isset($_GET['products_page']) && is_numeric($_GET['products_page']) ? (int)$_GET['products_page'] : 1;
 $materials_page = isset($_GET['materials_page']) && is_numeric($_GET['materials_page']) ? (int)$_GET['materials_page'] : 1;
+$export_csv = isset($_GET['export']) && $_GET['export'] === 'csv';
 $items_per_page = 25;
 
 $response = ['result' => 'error', 'errors' => []];
@@ -76,21 +77,27 @@ try {
     $total_sales_amount = $stmt->get_result()->fetch_assoc()['total'] ?: 0;
 
     // 產品統計
-    $products_offset = ($products_page - 1) * $items_per_page;
     $sql = "SELECT p.pid, p.pname, p.pimage, SUM(ol.oqty) as total_qty, SUM(ol.oqty * p.pcost) as total_amount
             FROM orderline ol
             JOIN product p ON ol.pid = p.pid
             JOIN orders o ON ol.oid = o.oid
             WHERE o.odate BETWEEN ? AND ?" . $products_condition . "
-            GROUP BY p.pid
-            LIMIT ? OFFSET ?";
-    $params = array_merge($base_params, $products_params, [$items_per_page, $products_offset]);
+            GROUP BY p.pid";
+    if (!$export_csv) {
+        $sql .= " LIMIT ? OFFSET ?";
+        $products_offset = ($products_page - 1) * $items_per_page;
+        $params = array_merge($base_params, $products_params, [$items_per_page, $products_offset]);
+        $bind_types = str_repeat('s', count($products_params) + 2) . 'ii';
+    } else {
+        $params = array_merge($base_params, $products_params);
+        $bind_types = str_repeat('s', count($params));
+    }
     error_log('get_report.php: Products SQL: ' . $sql . ', Params: ' . json_encode($params));
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
         throw new Exception('Prepare failed for products: ' . $conn->error);
     }
-    $stmt->bind_param(str_repeat('s', count($products_params) + 2) . 'ii', ...$params);
+    $stmt->bind_param($bind_types, ...$params);
     $stmt->execute();
     $result = $stmt->get_result();
     $products = [];
@@ -121,22 +128,28 @@ try {
     $products_total_pages = ceil($stmt->get_result()->fetch_assoc()['total'] / $items_per_page);
 
     // 材料統計
-    $materials_offset = ($materials_page - 1) * $items_per_page;
     $sql = "SELECT m.mid, m.mname, m.munit, SUM(ol.oqty * pm.pmqty) as total_material
             FROM orderline ol
             JOIN prodmat pm ON ol.pid = pm.pid
             JOIN material m ON pm.mid = m.mid
             JOIN orders o ON ol.oid = o.oid
             WHERE o.odate BETWEEN ? AND ?" . $materials_condition . "
-            GROUP BY m.mid
-            LIMIT ? OFFSET ?";
-    $params = array_merge($base_params, $materials_params, [$items_per_page, $materials_offset]);
+            GROUP BY m.mid";
+    if (!$export_csv) {
+        $sql .= " LIMIT ? OFFSET ?";
+        $materials_offset = ($materials_page - 1) * $items_per_page;
+        $params = array_merge($base_params, $materials_params, [$items_per_page, $materials_offset]);
+        $bind_types = str_repeat('s', count($materials_params) + 2) . 'ii';
+    } else {
+        $params = array_merge($base_params, $materials_params);
+        $bind_types = str_repeat('s', count($params));
+    }
     error_log('get_report.php: Materials SQL: ' . $sql . ', Params: ' . json_encode($params));
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
         throw new Exception('Prepare failed for materials: ' . $conn->error);
     }
-    $stmt->bind_param(str_repeat('s', count($materials_params) + 2) . 'ii', ...$params);
+    $stmt->bind_param($bind_types, ...$params);
     $stmt->execute();
     $result = $stmt->get_result();
     $materials = [];
@@ -171,11 +184,11 @@ try {
         'total_orders' => $total_orders,
         'total_sales_amount' => $total_sales_amount,
         'products' => $products,
-        'products_total_pages' => $products_total_pages,
-        'products_current_page' => $products_page,
+        'products_total_pages' => $export_csv ? 1 : $products_total_pages,
+        'products_current_page' => $export_csv ? 1 : $products_page,
         'materials' => $materials,
-        'materials_total_pages' => $materials_total_pages,
-        'materials_current_page' => $materials_page
+        'materials_total_pages' => $export_csv ? 1 : $materials_total_pages,
+        'materials_current_page' => $export_csv ? 1 : $materials_page
     ];
 } catch (Exception $e) {
     $response['errors'][] = 'Database error: ' . $e->getMessage();
