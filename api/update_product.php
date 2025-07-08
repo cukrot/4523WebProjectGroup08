@@ -36,12 +36,23 @@ try {
     // 處理圖片上傳
     $pimage = null;
     if (isset($_FILES['pimage']) && $_FILES['pimage']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = '../uploads/';
-        $fileName = time() . '_' . basename($_FILES['pimage']['name']);
-        $uploadPath = $uploadDir . $fileName;
-        if (move_uploaded_file($_FILES['pimage']['tmp_name'], $uploadPath)) {
-            $pimage = 'uploads/' . $fileName;
-        } else {
+        $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+        if (!in_array($_FILES['pimage']['type'], $allowed_types)) {
+            $response['errors'][] = 'Invalid image format. Only JPEG, PNG, or GIF allowed.';
+            echo json_encode($response);
+            exit;
+        }
+        $upload_dir = "/Applications/XAMPP/htdocs/4523WebProjectGroup08/uploads/";
+        if (!is_dir($upload_dir) && !mkdir($upload_dir, 0777, true)) {
+            $response['errors'][] = 'Failed to create upload directory.';
+            echo json_encode($response);
+            exit;
+        }
+        $ext = pathinfo($_FILES['pimage']['name'], PATHINFO_EXTENSION);
+        $filename = uniqid() . '.' . $ext; // 使用純 ASCII 名稱
+        $pimage = "/4523WebProjectGroup08/uploads/" . $filename; // 網站根目錄路徑
+        $server_path = $upload_dir . $filename;
+        if (!move_uploaded_file($_FILES['pimage']['tmp_name'], $server_path)) {
             $response['errors'][] = 'Failed to upload image.';
             echo json_encode($response);
             exit;

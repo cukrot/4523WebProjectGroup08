@@ -15,7 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!isset($material['mid']) || !isset($material['pmqty']) || $material['pmqty'] <= 0) {
             $errors[] = "Invalid material data.";
         }
-        // 檢查mid是否存在
         $mid = intval($material['mid']);
         $sql = "SELECT COUNT(*) FROM material WHERE mid = $mid";
         $result = mysqli_query($conn, $sql);
@@ -31,10 +30,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!in_array($_FILES['pimage']['type'], $allowed_types)) {
             $errors[] = "Invalid image format. Only JPEG, PNG, or GIF allowed.";
         } else {
-            $upload_dir = "../uploads/";
+            $upload_dir = "/Applications/XAMPP/htdocs/4523WebProjectGroup08/uploads/";
             if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
-            $pimage = $upload_dir . uniqid() . '_' . basename($_FILES['pimage']['name']);
-            if (!move_uploaded_file($_FILES['pimage']['tmp_name'], $pimage)) {
+            $ext = pathinfo($_FILES['pimage']['name'], PATHINFO_EXTENSION);
+            $filename = uniqid() . '.' . $ext; // 使用純 ASCII 名稱
+            $pimage = "/4523WebProjectGroup08/uploads/" . $filename;
+            $server_path = $upload_dir . $filename;
+            if (!move_uploaded_file($_FILES['pimage']['tmp_name'], $server_path)) {
                 $errors[] = "Failed to upload image.";
             }
         }
