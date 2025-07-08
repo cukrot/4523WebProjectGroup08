@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="report_title">Sales and Material Report</title>
+    <link rel="stylesheet" href="/4523WebProjectGroup08/assets/css/order_detail.css">
+    <link rel="stylesheet" href="/4523WebProjectGroup08/assets/css/report.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="/4523WebProjectGroup08/assets/js/language.js"></script>
+    <script src="/4523WebProjectGroup08/assets/js/common.js"></script>
+    <script src="/4523WebProjectGroup08/assets/js/report.js"></script>
+</head>
+<body>
+    <div id="header-container"></div>
+    <main class="main-content">
+        <h1 class="page-title" data-i18n="report_title">Sales and Material Report</h1>
+        <div class="info-cards-container">
+            <div class="info-card">
+                <h2 class="card-title" data-i18n="date_range">Date Range</h2>
+                <div class="info-list">
+                    <div class="info-item">
+                        <label class="info-label" data-i18n="start_date">Start Date</label>
+                        <input type="date" id="start-date" class="form-input">
+                    </div>
+                    <div class="info-item">
+                        <label class="info-label" data-i18n="end_date">End Date</label>
+                        <input type="date" id="end-date" class="form-input">
+                    </div>
+                    <div class="info-item">
+                        <button id="filter-button" class="submit-button" data-i18n="filter">Filter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="info-card">
+                <h2 class="card-title" data-i18n="summary">Summary</h2>
+                <div class="info-list">
+                    <div class="info-item">
+                        <span class="info-label" data-i18n="total_orders">Total Orders</span>
+                        <span class="info-value" id="total-orders">0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label" data-i18n="total_sales_amount">Total Sales Amount</span>
+                        <span class="info-value" id="total-sales-amount">$0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tables-container">
+            <div class="table-section products-section">
+                <h2 class="section-title" data-i18n="products_summary">Products Summary</h2>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="product_id">Product ID</th>
+                                <th data-i18n="product_name">Product Name</th>
+                                <th data-i18n="product_image">Product Image</th>
+                                <th data-i18n="total_quantity">Total Quantity</th>
+                                <th data-i18n="total_sales_amount">Total Sales Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-body"></tbody>
+                    </table>
+                </div>
+                <div class="pagination-container">
+                    <a href="#" id="products-first-page" class="pagination-link" data-i18n="first_page">First</a>
+                    <a href="#" id="products-prev-page" class="pagination-link" data-i18n="previous_page">Previous</a>
+                    <span id="products-page-info"></span>
+                    <a href="#" id="products-next-page" class="pagination-link" data-i18n="next_page">Next</a>
+                    <a href="#" id="products-last-page" class="pagination-link" data-i18n="last_page">Last</a>
+                </div>
+            </div>
+            <div class="table-section materials-section">
+                <h2 class="section-title" data-i18n="materials_summary">Materials Summary</h2>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="material_id">Material ID</th>
+                                <th data-i18n="material_name">Material Name</th>
+                                <th data-i18n="unit">Unit</th>
+                                <th data-i18n="total_material">Total Material Used</th>
+                            </tr>
+                        </thead>
+                        <tbody id="materials-body"></tbody>
+                    </table>
+                </div>
+                <div class="pagination-container">
+                    <a href="#" id="materials-first-page" class="pagination-link" data-i18n="first_page">First</a>
+                    <a href="#" id="materials-prev-page" class="pagination-link" data-i18n="previous_page">Previous</a>
+                    <span id="materials-page-info"></span>
+                    <a href="#" id="materials-next-page" class="pagination-link" data-i18n="next_page">Next</a>
+                    <a href="#" id="materials-last-page" class="pagination-link" data-i18n="last_page">Last</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

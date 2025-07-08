@@ -77,7 +77,16 @@ $translations = [
         'select_status' => 'Select Status',
         // 新增詞彙
         'material_details' => 'Material Details',
-        'total_material' => 'Total Material'
+        'total_material' => 'Total Material',
+        'view_products_title' => 'View product records',
+        'search_placeholder_products' => 'Search by Product ID or Name',
+        'no_products_found' => 'No products found',
+        'edit' => 'Edit',
+        'nav_products_view' => 'Products View',
+        'edit_product_title' => 'Edit product information',
+        'delete' => 'Delete Product',
+        'confirm_delete' => 'Are you sure you want to delete this product?',
+        'error_invalid_product' => 'Invalid or missing product ID.'
     ],
     'zh' => [
         'page_title' => '插入產品信息',
@@ -148,7 +157,16 @@ $translations = [
         'select_status' => '選擇狀態',
         // 新增詞彙
         'material_details' => '使用材料詳情',
-        'total_material' => '總使用材料'
+        'total_material' => '總使用材料',
+        'view_products_title' => '查看產品記錄',
+        'search_placeholder_products' => '按產品編號或名稱搜尋',
+        'no_products_found' => '未找到產品',
+        'edit' => '編輯',
+        'nav_products_view' => '產品查看',
+        'edit_product_title' => '編輯產品資訊',
+        'delete' => '刪除產品',
+        'confirm_delete' => '您確定要刪除此產品嗎？',
+        'error_invalid_product' => '無效或缺少產品編號。'
     ]
 ];
 

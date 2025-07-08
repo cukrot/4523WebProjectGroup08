@@ -1,0 +1,26 @@
+.tables-container {
+    display: flex;
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.table-section {
+    flex: 1;
+    min-width: 0;
+}
+
+.table-section .table-container {
+    background-color: #f9fafb;
+}
+
+.product-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+@media (max-width: 991px) {
+    .tables-container {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="view_products_title">View product records</title>
+    <link rel="stylesheet" href="/4523WebProjectGroup08/assets/css/view_orders.css">
+    <link rel="stylesheet" href="/4523WebProjectGroup08/assets/css/view_products.css">
+    <script src="/4523WebProjectGroup08/assets/js/language.js"></script>
+    <script src="/4523WebProjectGroup08/assets/js/common.js"></script>
+    <script src="/4523WebProjectGroup08/assets/js/view_products.js"></script>
+</head>
+<body class="page-container">
+    <div id="header-container"></div>
+    <main class="main-content">
+        <h1 class="page-title" data-i18n="view_products_title">View product records</h1>
+        <div class="search-container">
+            <input type="text" id="search-input" class="search-input" data-i18n-placeholder="search_placeholder_products" placeholder="Search by Product ID or Name">
+            <button id="search-button" class="search-button" data-i18n="search">Search</button>
+        </div>
+        <div class="table-container">
+            <table class="orders-table">
+                <thead class="table-header">
+                    <tr>
+                        <th data-i18n="product_id">Product ID</th>
+                        <th data-i18n="product_name">Product Name</th>
+                        <th data-i18n="description">Description</th>
+                        <th data-i18n="product_image">Product Image</th>
+                        <th data-i18n="single_cost">Single Cost</th>
+                        <th data-i18n="action">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="products-body"></tbody>
+            </table>
+        </div>
+        <div class="pagination-container">
+            <a href="#" id="first-page" class="pagination-link" data-i18n="first_page">First</a>
+            <a href="#" id="prev-page" class="pagination-link" data-i18n="previous_page">Previous</a>
+            <span id="page-info"></span>
+            <a href="#" id="next-page" class="pagination-link" data-i18n="next_page">Next</a>
+            <a href="#" id="last-page" class="pagination-link" data-i18n="last_page">Last</a>
+        </div>
+    </main>
+</body>
+</html>

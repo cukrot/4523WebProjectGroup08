@@ -1,0 +1,17 @@
+/* 擴展 view_orders.css 的樣式，僅針對產品頁面特定需求 */
+.product-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.description-column {
+    max-width: 300px;
+    word-wrap: break-word;
+}
+
+@media (max-width: 640px) {
+    .description-column {
+        max-width: 150px;
+    }
+}
