@@ -71,6 +71,21 @@ nav ul li a:hover {
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+        .auth-btn {
+            background-color: #FFD700; 
+        }
+        .auth-btn:hover {
+            background-color: #FFA500; 
+            transform: scale(1.05);
+        }
+        .form-footer a {
+            color: #FFD700; 
+            text-decoration: none;
+        }
+        .form-footer a:hover {
+            color: #FFA500; 
+            text-decoration: underline;
+        }
 
 .auth-form.active {
     display: block; /* Show the active form */
@@ -136,16 +151,7 @@ nav ul li a:hover {
     color: #666;
 }
 
-.form-footer a.toggle-link {
-    color: #333;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease; /* Smooth transition for hover effect */
-}
 
-.form-footer a.toggle-link:hover {
-    color: #f5c518; /* Hover effect for toggle links */
-}
 
 /* Footer */
 footer {

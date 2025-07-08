@@ -7,11 +7,19 @@
 
 .description-column {
     max-width: 300px;
-    word-wrap: break-word;
+    word-wrap: break-word; /* 支援較舊瀏覽器，允許單詞內換行 */
+    overflow-wrap: break-word; /* 現代標準，取代 word-wrap */
+    white-space: normal; /* 允許文字自動換行 */
+    overflow: hidden; /* 隱藏溢出內容 */
+    text-overflow: ellipsis; /* 超長文字顯示省略號 */
+    display: -webkit-box; /* 支援多行省略 */
+    -webkit-line-clamp: 2; /* 限制顯示3行 */
+    -webkit-box-orient: vertical; /* 垂直排列文字 */
 }
 
 @media (max-width: 640px) {
     .description-column {
         max-width: 150px;
+        -webkit-line-clamp: 2; /* 小螢幕限制為2行 */
     }
 }

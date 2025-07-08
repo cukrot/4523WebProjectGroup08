@@ -28,7 +28,7 @@ async function loadProducts(search = '', page = 1) {
                 row.innerHTML = `
                     <td>${product.pid}</td>
                     <td>${product.pname}</td>
-                    <td class="description-column">${product.pdesc}</td>
+                    <td class="description-column" title="${product.pdesc}">${product.pdesc}</td>
                     <td><img src="${product.pimage || '/4523WebProjectGroup08/assets/images/placeholder.png'}" alt="Product" class="product-image"></td>
                     <td>$${product.pcost}</td>
                     <td><button class="details-button" onclick="window.location.href='/4523WebProjectGroup08/pages/staff/edit_product.html?pid=${product.pid}'" data-i18n="edit">Edit</button></td>

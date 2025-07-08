@@ -1,0 +1,147 @@
+section {
+    width: 90%;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 20px 0;
+    border: 1px solid #FFD700; 
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #FFD700; 
+    color: #333;
+    font-weight: bold;
+}
+
+td {
+    background-color: #FFFACD; 
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #FFD700;
+    border-radius: 5px;
+    background-color: #FFF;
+    font-size: 14px;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+    outline: none;
+    border-color: #FFA500; 
+}
+
+.edit-btn, .save-btn, .toggle-password {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.edit-btn {
+    background-color: #FFD700; 
+    color: #333;
+}
+
+.edit-btn:hover {
+    background-color: #FFA500; 
+}
+
+.save-btn {
+    background-color: #32CD32; 
+    color: #fff;
+    display: none;
+}
+
+.save-btn:hover {
+    background-color: #228B22; 
+}
+
+.toggle-password {
+    background-color: transparent;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.toggle-password:hover {
+    background-color: #FFE4B5;
+}
+
+.nav-btn {
+    font-size: 24px;
+    color: #333;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-btn:hover {
+    color: #f5c518; 
+    background-color: #fff; 
+    transform: scale(1.1); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
+.cancel-btn {
+    background-color: #FF4500;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background-color: #CC3700;
+}
+
+#profile-table td {
+    padding: 10px;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    .edit-btn, .save-btn, .toggle-password {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

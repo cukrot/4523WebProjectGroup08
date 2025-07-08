@@ -1,4 +1,3 @@
-// 全局翻譯數據
 window.translations = {
     en: {
         error_no_material: 'Please add at least one material.',
@@ -7,7 +6,10 @@ window.translations = {
         material_success_message: 'Material inserted successfully.',
         error_invalid_material: 'Please enter valid material information.',
         error_invalid_order: 'Please enter valid order information.',
-        order_update_success: 'Order updated successfully.'
+        order_update_success: 'Order updated successfully.',
+        logout: 'Logout',
+        confirm_logout: 'Are you sure you want to logout?',
+        logout_success: 'Logout confirmed.'
     },
     zh: {
         error_no_material: '請至少添加一種材料。',
@@ -16,11 +18,13 @@ window.translations = {
         material_success_message: '材料插入成功。',
         error_invalid_material: '請輸入有效的材料信息。',
         error_invalid_order: '請輸入有效的訂單信息。',
-        order_update_success: '訂單更新成功。'
+        order_update_success: '訂單更新成功。',
+        logout: '登出',
+        confirm_logout: '您確定要登出嗎？',
+        logout_success: '已確認登出。'
     }
 };
 
-// 獲取當前語言
 function getLanguage() {
     const urlParams = new URLSearchParams(window.location.search);
     let lang = urlParams.get('lang') || localStorage.getItem('lang') || 'en';
@@ -29,7 +33,6 @@ function getLanguage() {
     return lang;
 }
 
-// 加載Header
 async function loadHeader() {
     const headerContainer = document.getElementById('header-container');
     const isStaffPage = window.location.pathname.includes('/staff/');
@@ -45,7 +48,6 @@ async function loadHeader() {
     }
 }
 
-// 更新翻譯
 async function updateTranslations() {
     const lang = getLanguage();
     try {
@@ -74,20 +76,37 @@ async function updateTranslations() {
     if (langSelect) langSelect.value = lang;
 }
 
-// 語言切換
 function switchLanguage(lang) {
     localStorage.setItem('lang', lang);
     const urlParams = new URLSearchParams(window.location.search);
-    // 保留現有參數
     const currentParams = {};
     urlParams.forEach((value, key) => {
         if (key !== 'lang') currentParams[key] = value;
     });
     currentParams['lang'] = lang;
-    // 構建新URL參數
     const newParams = new URLSearchParams(currentParams);
     window.location.search = newParams.toString();
 }
 
-// 初始化
+async function confirmLogout() {
+    const lang = getLanguage();
+    if (confirm(window.translations[lang].confirm_logout)) {
+        try {
+            const response = await fetch('/4523WebProjectGroup08/pages/staff/logout.php', {
+                method: 'POST'
+            });
+            const result = await response.json();
+            if (result.result === 'success') {
+                alert(window.translations[lang].logout_success);
+                window.location.href = '/4523WebProjectGroup08/customer/home.php';
+            } else {
+                alert('Logout failed: ' + result.message);
+            }
+        } catch (error) {
+            console.error('Logout error:', error);
+            alert('Logout failed: ' + error.message);
+        }
+    }
+}
+
 document.addEventListener('DOMContentLoaded', loadHeader);

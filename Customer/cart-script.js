@@ -1,155 +1,107 @@
-// Sample cart data (for testing purposes, will be replaced by localStorage)
-const sampleCartItems = [
-    { id: 1, name: "Interactive Robot Kit", price: 212, quantity: 1 },
-    { id: 2, name: "Plush Teddy Bear", price: 80, quantity: 2 }
-];
-
-// Load cart items from localStorage or use sample data if empty
-function loadCartItems() {
-    const cartItems = JSON.parse(localStorage.getItem('cart')) || sampleCartItems;
-    return cartItems;
-}
-
-// Save cart items to localStorage
-function saveCartItems(cartItems) {
-    localStorage.setItem('cart', JSON.stringify(cartItems));
-}
-
-// Render cart items
-function renderCartItems() {
-    const cartItemsContainer = document.querySelector('.cart-items');
-    const cartItems = loadCartItems();
-
-    // Clear existing items
-    cartItemsContainer.innerHTML = '';
-
-    if (cartItems.length === 0) {
-        cartItemsContainer.innerHTML = '<p class="empty-cart">Your cart is empty.</p>';
-        updateCartSummary();
-        return;
-    }
-
-    cartItems.forEach(item => {
-        const cartItem = document.createElement('div');
-        cartItem.classList.add('cart-item');
-        cartItem.innerHTML = `
-            <div class="cart-item-image"></div>
-            <div class="cart-item-details">
-                <h4>${item.name}</h4>
-                <p>$${item.price.toFixed(2)}</p>
-                <div class="cart-item-quantity">
-                    <button class="decrease-quantity" data-id="${item.id}">-</button>
-                    <input type="number" value="${item.quantity}" min="1" data-id="${item.id}">
-                    <button class="increase-quantity" data-id="${item.id}">+</button>
-                </div>
-                <a href="#" class="cart-item-remove" data-id="${item.id}">Remove</a>
-            </div>
-            <div class="cart-item-total">$${(item.price * item.quantity).toFixed(2)}</div>
-        `;
-        cartItemsContainer.appendChild(cartItem);
-    });
-
-    updateCartSummary();
-}
-
-// Update cart summary (subtotal, tax, total)
-function updateCartSummary() {
-    const cartItems = loadCartItems();
-    const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const deliveryCharge = subtotal * 0.05; // 5% delivery charge
-    const total = subtotal + deliveryCharge;
-
-    document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
-    document.getElementById('tax').textContent = `$${deliveryCharge.toFixed(2)}`;
-    document.getElementById('total').textContent = `$${total.toFixed(2)}`;
-}
-
-// Handle quantity changes
 function initQuantityControls() {
     const cartItemsContainer = document.querySelector('.cart-items');
 
-    // Decrease quantity
     cartItemsContainer.addEventListener('click', (e) => {
+        const cartItem = e.target.closest('.cart-item');
+        if (!cartItem) return;
+
+        const pid = cartItem.getAttribute('data-id');
+        const quantityInput = cartItem.querySelector('input[type="number"]');
+        let quantity = parseInt(quantityInput.value);
+
         if (e.target.classList.contains('decrease-quantity')) {
-            const id = parseInt(e.target.getAttribute('data-id'));
-            let cartItems = loadCartItems();
-            const item = cartItems.find(item => item.id === id);
-            if (item.quantity > 1) {
-                item.quantity -= 1;
-                saveCartItems(cartItems);
-                renderCartItems();
+            if (quantity > 1) {
+                quantity -= 1;
+                updateCartItem(pid, quantity);
             }
-        }
-    });
-
-    // Increase quantity
-    cartItemsContainer.addEventListener('click', (e) => {
-        if (e.target.classList.contains('increase-quantity')) {
-            const id = parseInt(e.target.getAttribute('data-id'));
-            let cartItems = loadCartItems();
-            const item = cartItems.find(item => item.id === id);
-            item.quantity += 1;
-            saveCartItems(cartItems);
-            renderCartItems();
-        }
-    });
-
-    // Manual quantity input
-    cartItemsContainer.addEventListener('input', (e) => {
-        if (e.target.type === 'number') {
-            const id = parseInt(e.target.getAttribute('data-id'));
-            const newQuantity = parseInt(e.target.value);
-            if (newQuantity < 1) {
-                e.target.value = 1;
-                return;
-            }
-            let cartItems = loadCartItems();
-            const item = cartItems.find(item => item.id === id);
-            item.quantity = newQuantity;
-            saveCartItems(cartItems);
-            renderCartItems();
-        }
-    });
-}
-
-// Handle remove item
-function initRemoveItem() {
-    const cartItemsContainer = document.querySelector('.cart-items');
-    cartItemsContainer.addEventListener('click', (e) => {
-        if (e.target.classList.contains('cart-item-remove')) {
+        } else if (e.target.classList.contains('increase-quantity')) {
+            quantity += 1;
+            updateCartItem(pid, quantity);
+        } else if (e.target.classList.contains('cart-item-remove')) {
             e.preventDefault();
-            const id = parseInt(e.target.getAttribute('data-id'));
-            let cartItems = loadCartItems();
-            cartItems = cartItems.filter(item => item.id !== id);
-            saveCartItems(cartItems);
-            renderCartItems();
+            removeCartItem(pid);
+        }
+    });
+
+    cartItemsContainer.addEventListener('change', (e) => {
+        if (e.target.type === 'number') {
+            const cartItem = e.target.closest('.cart-item');
+            const pid = cartItem.getAttribute('data-id');
+            const quantity = parseInt(e.target.value);
+            if (quantity >= 1) {
+                updateCartItem(pid, quantity);
+            } else {
+                e.target.value = 1;
+                alert('The quantity cannot be less than 1');
+            }
         }
     });
 }
 
-// Handle checkout
-function initCheckout() {
-    const checkoutBtn = document.querySelector('.checkout-btn');
-    checkoutBtn.addEventListener('click', () => {
-        const cartItems = loadCartItems();
-        if (cartItems.length === 0) {
-            alert('Your cart is empty. Add some items before checking out!');
-            return;
+function updateCartItem(pid, quantity) {
+    fetch('update_cart.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `pid=${pid}&quantity=${quantity}`
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert(data.message || 'Failed to update shopping cart');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while updating the shopping cart');
+        });
+}
+
+function removeCartItem(pid) {
+    fetch('remove_from_cart.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `pid=${pid}`
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert(data.message || 'Failed to remove product');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while removing the item');
+        });
+}
+
+function applyVIPDiscount() {
+    const vipCodeInput = document.getElementById('vip-code');
+    const applyBtn = document.getElementById('apply-vip');
+    const totalSpan = document.getElementById('total');
+    const hiddenTotalInput = document.getElementById('hidden-total');
+    const subtotal = parseFloat(document.getElementById('subtotal').textContent.replace('$', ''));
+    const deliveryCharge = parseFloat(document.getElementById('delivery-charge').textContent.replace('$', ''));
+
+    applyBtn.addEventListener('click', () => {
+        const code = vipCodeInput.value.trim();
+        if (code === 'vip666') {
+            const discountedTotal = (subtotal + deliveryCharge) * 0.8;
+            totalSpan.textContent = '$' + discountedTotal.toFixed(2);
+            hiddenTotalInput.value = discountedTotal.toFixed(2);
+            alert('VIP discount applied successfully!');
+        } else {
+            alert('Invalid VIP code.');
         }
-        alert('Thank you for your purchase! Your order has been placed.');
-        // Clear the cart after checkout
-        saveCartItems([]);
-        renderCartItems();
     });
 }
 
-// Initialize the cart page
 function init() {
-    renderCartItems();
     initQuantityControls();
-    initRemoveItem();
-    initCheckout();
+    applyVIPDiscount();
 }
 
-// Run the initialization
 init();
